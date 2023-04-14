@@ -1,0 +1,28 @@
+FROM node:18
+
+LABEL version="1.0"
+LABEL description="React Frontend for IoT Portal"
+
+ENV NPM_CONFIG_LOGLEVEL warn
+ARG app_env
+ENV APP_ENV $app_env
+
+RUN mkdir -p /client
+WORKDIR /client
+
+COPY . .
+
+RUN npm install --legacy-peer-deps
+
+RUN npm install -g socket.io-client
+
+EXPOSE 3000
+CMD if [ ${APP_ENV} = production ]; \
+	then \
+	npm install -g http-server && \
+	npm run build && \
+	cd build && \
+	hs -p 3000; \
+	else \
+	npm run start; \
+	fi

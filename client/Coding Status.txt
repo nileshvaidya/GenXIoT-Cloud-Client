@@ -1,0 +1,5 @@
+Device Page to be coded.
+
+Create Analog Data Card component and Digital Data Card Component and display the data.
+
+Code AnalogParams for finalizing Analog Card to display
